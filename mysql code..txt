@@ -1,0 +1,22 @@
+CREATE DATABASE recharge_db;
+
+USE recharge_db;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE
+);
+select *from users;
+CREATE TABLE IF NOT EXISTS recharge_details (
+    recharge_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,  -- This will still refer to id in users table
+    name VARCHAR(100) NOT NULL,
+    mobile_number VARCHAR(15) NOT NULL,
+    network_type VARCHAR(20) NOT NULL,
+    network_name VARCHAR(50) NOT NULL,
+    recharge_plan VARCHAR(20) NOT NULL,
+    -- Store the amount for the recharge plan
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE  -- Reference to id in users table
+);
